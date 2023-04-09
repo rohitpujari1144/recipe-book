@@ -1,5 +1,5 @@
 # Recipe Book
-Frontend deployed URL - https://new-user-management.netlify.app/
+Frontend deployed URL - https://new-recipe-book.netlify.app/
 
 Backend deployed URL - https://recipe-wbww.onrender.com
 
