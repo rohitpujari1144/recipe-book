@@ -10,6 +10,6 @@ I have developed a recipe book web application using React.js. The recipe book a
 - Recipe Details: Users are able to view the details of a recipe, including its ingredients,instructions, and image
 - User Profile: Users are able to view their profile, which should include their saved recipes
 - Use of Axios for API calls
-- Proper use of React components, hooks, and routing5
+- Proper use of React components, hooks, and routing
 - Proper use of Bootstrap and materual-UI library
 - Proper use of form validation and error handling
