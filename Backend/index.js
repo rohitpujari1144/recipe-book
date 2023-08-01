@@ -138,38 +138,38 @@ app.get('/login', async (req, res) => {
 })
 
 // recipes saved by user
-app.post('/saveRecipe', async (req, res) => {
-    const client = await MongoClient.connect(dbUrl)
-    try {
-        const db = client.db('recipes')
-        await db.collection('saved recipes').insertOne(req.body)
-        res.status(201).send({ message: 'Recipe successfully saved', data: req.body })
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).send({ message: 'Internal server error', error })
-    }
-    finally {
-        client.close()
-    }
-})
+// app.post('/saveRecipe', async (req, res) => {
+//     const client = await MongoClient.connect(dbUrl)
+//     try {
+//         const db = client.db('Recipe_Book')
+//         await db.collection('saved recipes').insertOne(req.body)
+//         res.status(201).send({ message: 'Recipe successfully saved', data: req.body })
+//     }
+//     catch (error) {
+//         console.log(error);
+//         res.status(500).send({ message: 'Internal server error', error })
+//     }
+//     finally {
+//         client.close()
+//     }
+// })
 
 // get all saved recipes
-app.get('/allSavedRecipes', async (req, res) => {
-    const client = await MongoClient.connect(dbUrl)
-    try {
-        const db = client.db('recipes')
-        let recipes = await db.collection('saved recipes').find().toArray()
-        res.status(200).send(recipes)
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).send({ message: 'Internal server error', error })
-    }
-    finally {
-        client.close()
-    }
-})
+// app.get('/allSavedRecipes', async (req, res) => {
+//     const client = await MongoClient.connect(dbUrl)
+//     try {
+//         const db = client.db('Recipe_Book')
+//         let recipes = await db.collection('saved recipes').find().toArray()
+//         res.status(200).send(recipes)
+//     }
+//     catch (error) {
+//         console.log(error);
+//         res.status(500).send({ message: 'Internal server error', error })
+//     }
+//     finally {
+//         client.close()
+//     }
+// })
 
 // delete account
 app.delete('/deleteUser/:userId', async (req, res) => {
