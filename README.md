@@ -1,7 +1,7 @@
 # Recipe Book
 Frontend deployed URL - https://new-recipe-book.netlify.app/
 
-Backend deployed URL - https://recipe-wbww.onrender.com
+Backend deployed URL - https://recipe-wbww.onrender.com/allRecipes
 
 I have developed a recipe book web application using React.js. The recipe book allow users to view, search and save recipes. Some of the feaures of recipe book are :
 - User Authentication: Users are able to sign up, login, and logout
