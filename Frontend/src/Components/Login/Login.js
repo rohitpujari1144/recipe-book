@@ -84,7 +84,9 @@ function Login() {
         if (emailError.innerText === "" && passwordError.innerText === "") {
             try {
                 let res = await axios.get(`https://recipe-wbww.onrender.com/users/login/${email.value}/${password.value}`)
+                // console.log(res)
                 sessionStorage.setItem('userData', JSON.stringify(res.data.userData[0]));
+                sessionStorage.setItem('token', JSON.stringify(res.data.tokenData));
                 successToastMessage()
                 setTimeout(() => {
                     navigate('/home')
