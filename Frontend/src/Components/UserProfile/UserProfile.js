@@ -10,6 +10,10 @@ function UserProfile() {
     let navigate = useNavigate()
     let count = 0;
     let userData = JSON.parse(sessionStorage.getItem('userData'));
+    let token = JSON.parse(sessionStorage.getItem('token'));
+    let auth = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
 
     function editClick() {
         const name = document.getElementById('name')
@@ -105,13 +109,19 @@ function UserProfile() {
                 securityCode: securityCode.value
             }
             try {
-                await axios.put(`https://recipe-wbww.onrender.com/users/update/${userData.email}`, newData)
+                await axios.put(`https://recipe-wbww.onrender.com/users/update/${userData.email}`, newData, auth)
                 sessionStorage.setItem('userData', JSON.stringify(newData))
                 successToastMessage('Profile successfully updated')
             }
             catch (error) {
                 if (error.response) {
-                    errorToastMessage()
+                    if (error.response.status === 401) {
+                        warnToast('Session expired. Please login again')
+                        setTimeout(() => {
+                            navigate('/')
+                            sessionStorage.clear()
+                        }, 3500);
+                    }
                 }
                 else {
                     errorToastMessage()
@@ -124,7 +134,7 @@ function UserProfile() {
         let confirmation = window.confirm("Are you sure, you want to delete your account?")
         if (confirmation) {
             try {
-                await axios.delete(`https://recipe-wbww.onrender.com/users/delete/${userData.email}`)
+                await axios.delete(`https://recipe-wbww.onrender.com/users/delete/${userData.email}`, auth)
                 successToastMessage('Account successfully deleted')
                 setTimeout(() => {
                     navigate('/')
@@ -132,7 +142,13 @@ function UserProfile() {
             }
             catch (error) {
                 if (error.response) {
-                    errorToastMessage()
+                    if (error.response.status === 401) {
+                        warnToast('Session expired. Please login again')
+                        setTimeout(() => {
+                            navigate('/')
+                            sessionStorage.clear()
+                        }, 3500);
+                    }
                 }
                 else {
                     errorToastMessage()
@@ -157,6 +173,19 @@ function UserProfile() {
 
     function successToastMessage(message) {
         toast.success(message, {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
+
+    function warnToast(message) {
+        toast.warn(message, {
             position: "bottom-left",
             autoClose: 3000,
             hideProgressBar: false,
