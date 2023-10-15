@@ -136,7 +136,7 @@ router.put('/changePassword/:email/:securityCode', async (req, res) => {
 })
 
 // update user info and save recipes
-router.put('/update/:email', async (req, res) => {
+router.put('/update/:email', validate, async (req, res) => {
   const client = new MongoClient(dbUrl)
   await client.connect()
   try {
